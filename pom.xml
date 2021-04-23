@@ -89,7 +89,7 @@
 				<artifactId>git-commit-id-plugin</artifactId>
 				<version>4.0.4</version>
 				<configuration>
-					<failOnNoGitDirectory>false</failOnNoGitDirectory>
+<!--					<failOnNoGitDirectory>false</failOnNoGitDirectory>-->
 					<dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
 					<prefix>git</prefix>
 					<verbose>false</verbose>
