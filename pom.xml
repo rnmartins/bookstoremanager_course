@@ -90,6 +90,10 @@
 				<version>4.0.4</version>
 				<configuration>
 					<failOnNoGitDirectory>false</failOnNoGitDirectory>
+					<dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+					<prefix>git</prefix>
+					<verbose>false</verbose>
+					<generateGitPropertiesFile>true</generateGitPropertiesFile>
 				</configuration>
 			</plugin>
 		</plugins>
