@@ -30,7 +30,7 @@ public class AuthorControllerTest {
         authorDTOBuilder = AuthorDTOBuilder.builder().build();
         mockMvc = MockMvcBuilders.standaloneSetup(authorController)
                 .setCustomArgumentResolvers(new PageableHandlerMethodArgumentResolver())
-                .setViewResolvers(s, (s, locale) -> new MappingJackson2JsonView())
+                .setViewResolvers((s, locale) -> new MappingJackson2JsonView())
                 .build();
     }
 }
