@@ -2,7 +2,9 @@ package com.renanmartins.bookstoremanager.author.entity;
 
 import com.renanmartins.bookstoremanager.books.entity.Book;
 import com.renanmartins.bookstoremanager.entity.Auditable;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -17,7 +19,7 @@ import java.util.List;
 @Entity
 public class Author extends Auditable {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @Column(nullable = false, unique = true)
