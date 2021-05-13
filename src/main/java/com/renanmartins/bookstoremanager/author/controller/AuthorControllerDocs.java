@@ -4,7 +4,7 @@ import com.renanmartins.bookstoremanager.author.dto.AuthorDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;;
+import io.swagger.annotations.ApiResponses;;import java.util.List;
 
 @Api("Authors management")
 public interface AuthorControllerDocs {
@@ -24,4 +24,10 @@ public interface AuthorControllerDocs {
             @ApiResponse(code = 404, message = "Author not found error code")
     })
     AuthorDTO findById(Long id);
+
+    @ApiOperation(value = "List all registered authors")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Return all registered authors"),
+    })
+    List<AuthorDTO> findAll();
 }
