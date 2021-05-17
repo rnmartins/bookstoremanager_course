@@ -138,6 +138,65 @@
 				}
 			},
 			"response": []
+		},
+		{
+			"name": "Find Publisher By id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/v1/publishers/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"publishers",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "List Publishers",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/v1/publishers",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"publishers"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Publisher By Id",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/api/v1/publishers/1",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						"api",
+						"v1",
+						"publishers",
+						"1"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
