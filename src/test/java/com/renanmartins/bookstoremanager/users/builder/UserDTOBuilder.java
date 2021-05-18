@@ -25,7 +25,7 @@ public class UserDTOBuilder {
     private String email = "renan@teste.com";
 
     @Builder.Default
-    private String username = "renan";
+    private String username = "renanmartins";
 
     @Builder.Default
     private String password = "123456";
