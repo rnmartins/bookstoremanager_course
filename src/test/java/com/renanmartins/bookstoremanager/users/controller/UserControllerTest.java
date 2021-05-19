@@ -83,4 +83,21 @@ public class UserControllerTest {
                 .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(status().isNoContent());
     }
+
+    @Test
+    void whenPUTIsCalledThenOkStatusShouldBeReturned() throws Exception {
+        UserDTO expectedUserToUpdateDTO = userDTOBuilder.buildUserDTO();
+        expectedUserToUpdateDTO.setUsername("renanupdate");
+        String expectedUpdateMessage = "User renanupdate with ID 1 successfully updated";
+        MessageDTO expectedUpdateMessageDTO = MessageDTO.builder().message(expectedUpdateMessage).build();
+        var expectedUserToUpdateId = expectedUserToUpdateDTO.getId();
+
+        when(userService.update(expectedUserToUpdateId, expectedUserToUpdateDTO)).thenReturn(expectedUpdateMessageDTO);
+
+        mockMvc.perform(put(USERS_API_URL_PATH + "/" + expectedUserToUpdateId)
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(asJsonString(expectedUserToUpdateDTO)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.message", is(expectedUpdateMessage)));
+    }
 }
