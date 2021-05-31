@@ -22,5 +22,5 @@ public abstract class Auditable {
 
     @LastModifiedDate
     @Column
-    protected LocalDateTime lastModifiedDate;
+    protected LocalDateTime lastModifiedDate =  LocalDateTime.now();
 }

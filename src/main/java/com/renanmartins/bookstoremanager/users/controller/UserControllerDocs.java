@@ -1,5 +1,7 @@
 package com.renanmartins.bookstoremanager.users.controller;
 
+import com.renanmartins.bookstoremanager.users.dto.JwtRequest;
+import com.renanmartins.bookstoremanager.users.dto.JwtResponse;
 import com.renanmartins.bookstoremanager.users.dto.MessageDTO;
 import com.renanmartins.bookstoremanager.users.dto.UserDTO;
 import io.swagger.annotations.Api;
@@ -32,4 +34,11 @@ public interface UserControllerDocs {
                     "or an error on validation field rules")
     })
     MessageDTO update(Long id, UserDTO userToUpdateDTO);
+
+    @ApiOperation(value = "User authentication operation")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Success user authenticated!"),
+            @ApiResponse(code = 404, message = "User not found")
+    })
+    JwtResponse createAuthenticationToken(JwtRequest jwtRequest);
 }
