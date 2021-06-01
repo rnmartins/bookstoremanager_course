@@ -3,7 +3,6 @@ package com.renanmartins.bookstoremanager.config;
 import com.renanmartins.bookstoremanager.users.service.AuthenticationService;
 import com.renanmartins.bookstoremanager.users.service.JwtTokenManager;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.actuate.endpoint.SecurityContext;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -32,14 +31,14 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         var jwtToken = "";
 
         var requestTokenHeader = request.getHeader("Authorization");
-        if(isTokenPresent(requestTokenHeader)) {
+        if (isTokenPresent(requestTokenHeader)) {
             jwtToken = requestTokenHeader.substring(7);
             username = jwtTokenManager.getUsernameFromToken(jwtToken);
         } else {
             logger.warn("JWT Token does not begin with Bearer String");
         }
 
-        if(isUsernameInContext(username)) {
+        if (isUsernameInContext(username)) {
             addUsernameInContext(request, username, jwtToken);
         }
         chain.doFilter(request, response);
@@ -55,7 +54,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
 
     private void addUsernameInContext(HttpServletRequest request, String username, String jwtToken) {
         UserDetails userDetails = authenticationService.loadUserByUsername(username);
-        if(jwtTokenManager.validateToken(jwtToken, userDetails)) {
+        if (jwtTokenManager.validateToken(jwtToken, userDetails)) {
             UsernamePasswordAuthenticationToken authenticationToken =
                     new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
             authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
