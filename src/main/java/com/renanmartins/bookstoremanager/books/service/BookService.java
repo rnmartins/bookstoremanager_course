@@ -17,6 +17,7 @@ import com.renanmartins.bookstoremanager.users.service.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -71,5 +72,18 @@ public class BookService {
                 .ifPresent(duplicatedBook -> {
                     throw new BookAlreadyExistsException(bookRequestDTO.getName(), bookRequestDTO.getIsbn(), foundUser.getName());
                 });
+    }
+
+    @Transactional
+    public void deleteByIdAndUser(AuthenticatedUser authenticatedUser, Long bookId) {
+        User foundAuthenticatedUser  = userService.verifyAndGetUserIfExists(authenticatedUser.getUsername());
+        Book foundBookToDelete = verifyAndGetIfExists(bookId, foundAuthenticatedUser);
+        bookRepository.deleteByIdAndUser(foundBookToDelete.getId(), foundAuthenticatedUser);
+    }
+
+    private Book verifyAndGetIfExists(Long bookId, User foundAuthenticatedUser) {
+        Book foundBookToDelete = bookRepository.findByIdAndUser(bookId, foundAuthenticatedUser)
+                .orElseThrow(() -> new BookNotFoundException(bookId));
+        return foundBookToDelete;
     }
 }
